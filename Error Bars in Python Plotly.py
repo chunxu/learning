@@ -22,3 +22,18 @@ fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species",
                  error_y="e_plus", error_y_minus="e_minus")
 fig.show()
 
+#Error Bars with graph_objects
+#Basic Symmetric Error Bars
+
+import plotly.graph_objects as go
+
+fig = go.Figure(data=go.Scatter(
+        x=[0, 1, 2],
+        y=[6, 10, 2],
+        error_y=dict(
+            type='data', # value of error bar given in data coordinates
+            array=[1, 2, 3],
+            visible=True)
+    ))
+fig.show()
+
