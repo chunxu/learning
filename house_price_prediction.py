@@ -46,3 +46,35 @@ plt.ylabel('SalePrice', fontsize = 13)
 plt.xlabel('AGE', fontsize = 13)
 plt.show()
 
+from scipy import stats
+from scipy.stats import norm, skew
+sns.distplot(data['SalePrice'], fit=norm);
+(mu, sigma) = norm.fit(data['SalePrice'])
+
+print('\n mu={:.2f} and sigma = {:.2f}\n'.format(mu, sigma))
+
+plt.legend(['Normal dist.($\mu=${:.2f} and $\sigma=${:.2f})'.format(mu,sigma)],
+          loc='best')
+plt.ylabel('Frequency')
+plt.title('SalePrice distribution')
+
+#get qq plot
+fig = plt.figure()
+res= stats.probplot(data['SalePrice'], plot=plt)
+plt.show()
+
+data['SalePrice'] = np.log1p (data['SalePrice'])
+sns.distplot(data['SalePrice'], fit=norm);
+(mu, sigma) = norm.fit(data['SalePrice'])
+print('\n mu={:.2f} and sigma = {:.2f}\n'.format(mu, sigma))
+
+plt.legend(['Normal dist.($\mu=${:.2f} and $\sigma=${:.2f})'.format(mu,sigma)],
+          loc='best')
+plt.ylabel('Frequency')
+plt.title('SalePrice distribution')
+
+#get qq plot
+fig = plt.figure()
+res= stats.probplot(data['SalePrice'], plot=plt)
+plt.show()
+
