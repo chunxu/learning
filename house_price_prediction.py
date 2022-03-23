@@ -19,3 +19,8 @@ y = load_boston.target
 data = pd.DataFrame(x, columns = load_boston.feature_names)
 data['SalePrice'] = y
 data.head()
+
+print(load_boston.DESCR)
+data.shape
+data.info()
+
