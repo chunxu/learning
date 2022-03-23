@@ -78,3 +78,19 @@ fig = plt.figure()
 res= stats.probplot(data['SalePrice'], plot=plt)
 plt.show()
 
+
+#Data correlation
+
+plt.figure(figsize=(10,10))
+cor = data.corr()
+sns.heatmap(cor, annot=True, cmap=plt.cm.PuBu)
+plt.show()
+
+cor_target = abs(cor['SalePrice']) # absolute value of corelation
+relevant_features = cor_target[cor_target>0.2] #highly correlated features
+names  = [index for index, value in relevant_features.iteritems()]
+names.remove('SalePrice') #remove target feature
+
+print(names)
+print(len(names))
+
