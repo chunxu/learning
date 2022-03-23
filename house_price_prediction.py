@@ -94,3 +94,26 @@ names.remove('SalePrice') #remove target feature
 print(names)
 print(len(names))
 
+from sklearn.model_selection import train_test_split
+X =data.drop('SalePrice', axis=1)
+y =data['SalePrice']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2,random_state=42)
+
+print(X_train.shape)
+print(X_test.shape)
+print(y_train.shape)
+print(y_test.shape)
+
+from sklearn.linear_model import LinearRegression
+lr = LinearRegression()
+lr.fit(X_train, y_train)
+
+predictions = lr.predict(X_test)
+print("Actual value of the house: - ", y_test[0])
+print("Model predicted value: - ", predictions[0])
+
+from sklearn.metrics import mean_squared_error
+mse = mean_squared_error(y_test, predictions)
+rmse=np.sqrt(mse)
+print (mse)
+print (rmse)
