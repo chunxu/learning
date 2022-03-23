@@ -23,4 +23,10 @@ data.head()
 print(load_boston.DESCR)
 data.shape
 data.info()
+data.describe()
+
+data.isnull().sum()
+
+sns.pairplot(data,height=2.5)
+plt.tight_layout()
 
