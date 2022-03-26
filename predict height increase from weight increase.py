@@ -151,3 +151,16 @@ print("MSE:",mean_squared_error(y_test, y_poly3pred))
 print("The third degree polynomial regression model as: y =", theta0, " + ", theta1, "x", " + ", theta2, "x^2"," + ", theta3, "x^3")
 print("score",poly_model.score(X_poly3_test, y_test))
 
+'''
+Comparing the three models (LinearRegression vs the second and third degree Polynomial Regression) by MSE and scores, the third degree Polynomial Regression Model performs best while the LinearRegression model performs worst.
+
+For LinearRegression model, for every 10 units of increase in weight, the height increase would be: 10 times of 1.78654145 = 17.8654145
+
+For the second and third degree Polynomial Regression Models, for every 10 units of increase in weight, the height increase would be denpending on the baseline of weight:
+
+For example, using the second degree model: 
+height increase = 10*(theta1 + theta2) + 20 * theta2 * base_weight
+                = 10*(4.220558473637296 -0.038649397968607294) + 20*(-0.038649397968607294)* base_weight
+                = 41.82 - 0.7730*base_weight, where base_weight is the weight before increase
+            
+'''           
