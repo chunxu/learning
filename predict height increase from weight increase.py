@@ -61,3 +61,93 @@ The polynormial regression model fit the data much better compared to simple lin
 Will use both methods and then compare their performances by mean_squared_error.
 Final calculation of increased height based on increased weight will be via formular from the Regression Models
 '''
+
+#Input Split
+X = df['weight'].values[:,np.newaxis]
+y = df['height']
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
+
+# import linear reg model
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.metrics import mean_squared_error
+
+# sort the values of x in order to plot later *** forgot to do that in the beginning
+import operator
+sort_axis = operator.itemgetter(0)
+sorted_zip = sorted(zip(X_test,y_test), key=sort_axis)
+X_test, y_test = np.array(list(zip(*sorted_zip)))
+X_test = X_test[:, np.newaxis]
+
+# Degree 2 preprocesses X to 1, x and x^2
+pre_process = PolynomialFeatures(degree=2)
+X_poly2_train = pre_process.fit_transform(X_train)
+X_poly2_test = pre_process.fit_transform(X_test)
+#print(X_poly2_train.shape, X_poly2_test.shape, y_train.shape, y_test.shape)
+
+# Degree 3 preprocesses X to 1, x, x^2 and x^3
+pre_process = PolynomialFeatures(degree=3)
+X_poly3_train = pre_process.fit_transform(X_train)
+X_poly3_test = pre_process.fit_transform(X_test)
+print(X_poly3_train.shape, X_poly3_test.shape, y_train.shape, y_test.shape)
+
+#linearregression Model Training
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+# predict the test set
+y_linearpred = model.predict(X_test)
+
+# Plot model on the data
+plt.scatter(X_test, y_test, c = "yellow")
+plt.xlabel("weight")
+plt.ylabel("height")
+plt.plot(X_test, y_linearpred)
+
+#Evaluate LinearRegression Regression Model   
+print("Linear Model Report")
+print("MSE:",mean_squared_error(y_test, y_linearpred))
+print("coef_", model.coef_)
+print("score",model.score(X_test, y_test))
+
+#Implement the second degree Polynomial Regression Model
+poly_model = LinearRegression()
+poly_model.fit(X_poly2_train, y_train)
+y_poly2pred = poly_model.predict(X_poly2_test)
+# Plot model on the data
+plt.scatter(X_test, y_test, c = "orange")
+plt.xlabel("weight")
+plt.ylabel("height")
+plt.plot(X_test, y_poly2pred)
+
+#Evaluate Polynomial Regression Model
+theta0 = poly_model.intercept_
+_, theta1, theta2 = poly_model.coef_
+#print out results
+print("The second degree Polynomial Regression Model Report")
+print("MSE:",mean_squared_error(y_test, y_poly2pred))
+print("The second degree polynomial regression model as: y =", theta0, " + ", theta1, "x", " + ", theta2, "x^2")
+print("score",poly_model.score(X_poly2_test, y_test))
+
+#Implement the third degree Polynomial Regression Model
+poly_model = LinearRegression()
+poly_model.fit(X_poly3_train, y_train)
+y_poly3pred = poly_model.predict(X_poly3_test)
+# Plot model on the data
+plt.scatter(X_test, y_test, c = "brown")
+plt.xlabel("weight")
+plt.ylabel("height")
+plt.plot(X_test, y_poly3pred)
+
+#Evaluate Polynomial Regression Model
+theta0 = poly_model.intercept_
+_, theta1, theta2, theta3 = poly_model.coef_
+
+#print out results
+print("The third degree Polynomial Regression Model Report")
+print("MSE:",mean_squared_error(y_test, y_poly3pred))
+print("The third degree polynomial regression model as: y =", theta0, " + ", theta1, "x", " + ", theta2, "x^2"," + ", theta3, "x^3")
+print("score",poly_model.score(X_poly3_test, y_test))
+
