@@ -44,3 +44,20 @@ It looks like 'male' has little impact on height (coefficient=0.14).
 Age showed strong and similar correlation with both height and weight so it is not an independent feature from weight.
 To predict height increase from weight increase, will use weight values only to fit models
 '''
+
+#visualize height by weight
+sns.regplot(y=df['height'], x=df['weight'])
+# A simple linear reg model kinds of fit the data, but not very well.
+
+# try polynormial regression with one increased degree
+sns.regplot(data=df, y = 'height',x = 'weight', order =2)
+
+
+# try polynormial regression with one increased degree
+sns.regplot(data=df, y = 'height',x = 'weight', order =3)
+
+'''
+The polynormial regression model fit the data much better compared to simple linear regression.
+Will use both methods and then compare their performances by mean_squared_error.
+Final calculation of increased height based on increased weight will be via formular from the Regression Models
+'''
