@@ -164,3 +164,58 @@ height increase = 10*(theta1 + theta2) + 20 * theta2 * base_weight
                 = 41.82 - 0.7730*base_weight, where base_weight is the weight before increase
             
 '''           
+Now will try to transform the data first and fit the model to see whether it will have better performance.
+...
+
+# make log transformation for weight and age only
+df_log = pd.DataFrame()
+df_log[['log_weight','log_age']]= np.log(df[['weight','age']])
+df_log['male'] = df['male']
+df_log['height']=df['height']
+
+#Calculate corelation between features (weight, age, male) and target (height)
+corr = df_log.corr()
+plt.figure(figsize=(10,5))
+sns.heatmap(corr, annot=True, cmap='coolwarm')
+
+#visualize height by weight
+sns.regplot(y=df_log['height'], x=df_log['log_weight'])
+# A simple linear reg model kinds of fit the data, but not very well.
+
+#Input Split
+X = df_log['log_weight'].values[:,np.newaxis]
+y = df_log['height']
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
+
+#linearregression Model Training
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+# predict the test set
+y_linearpred = model.predict(X_test)
+
+# Plot model on the data
+plt.scatter(X_test, y_test, c = "yellow")
+plt.xlabel("log_weight")
+plt.ylabel("height")
+plt.plot(X_test, y_linearpred)
+
+#Evaluate LinearRegression Regression Model   
+print("Linear Model Report")
+print("MSE:",mean_squared_error(y_test, y_linearpred))
+print("coef_", model.coef_)
+print("intercept", model.intercept_)
+print("score",model.score(X_test, y_test))
+
+'''
+After log transformation, the data fit linear model much better than before. score 0.93 vs 0.86.
+Based on current model,
+
+    height = 47.2 * log_weight - 24.14
+    
+for every 10 units of increase in weight, the height increase would be depending on the baseline of weight, too:
+
+    height increase = 47.2 * (log(base_weight+10)-log(base_weight))
+ '''
