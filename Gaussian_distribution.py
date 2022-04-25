@@ -43,4 +43,3 @@ for i in range(len(result.critical_values)):
 	else:
 		print('Probably not Gaussian at the %.1f%% level' % (sl))
 		
-
