@@ -87,3 +87,61 @@ df['twp'].value_counts().head(5)
 
 
 len(df['title'].unique())
+
+
+# ## Creating new features
+
+# ** In the titles column there are "Reasons/Departments" specified before the title code. These are EMS, Fire, and Traffic. Use .apply() with a custom lambda expression to create a new column called "Reason" that contains this string value.** 
+# 
+# **For example, if the title column value is EMS: BACK PAINS/INJURY , the Reason column value would be EMS. **
+
+# In[41]:
+
+
+df['Reason'] = df['title'].apply(lambda x : x.split(':')[0])
+
+
+# In[45]:
+
+
+df['Reason'].value_counts()
+
+
+# ** What is the most common Reason for a 911 call based off of this new column? **
+
+# In[50]:
+
+
+sns.countplot(df['Reason'])
+
+
+# ** Now use seaborn to create a countplot of 911 calls by Reason. **
+
+# In[49]:
+
+
+sns.countplot(x= 'Reason', data = df)
+
+
+# ___
+# ** Now let us begin to focus on time information. What is the data type of the objects in the timeStamp column? **
+
+# In[52]:
+
+
+type(df['timeStamp'][0])
+
+
+# ** You should have seen that these timestamps are still strings. Use [pd.to_datetime](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.to_datetime.html) to convert the column from strings to DateTime objects. **
+
+# In[56]:
+
+
+df['timeStamp'] = pd.to_datetime(df['timeStamp'])
+
+
+# In[67]:
+
+
+df['timeStamp'][0].year
+
