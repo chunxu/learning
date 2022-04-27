@@ -140,8 +140,25 @@ type(df['timeStamp'][0])
 df['timeStamp'] = pd.to_datetime(df['timeStamp'])
 
 
-# In[67]:
+df['timeStamp'][0].dayofweek
 
 
-df['timeStamp'][0].year
+# ** You can now grab specific attributes from a Datetime object by calling them. For example:**
+# 
+#     time = df['timeStamp'].iloc[0]
+#     time.hour
+# 
+# **You can use Jupyter's tab method to explore the various attributes you can call. Now that the timestamp column are actually DateTime objects, use .apply() to create 3 new columns called Hour, Month, and Day of Week. You will create these columns based off of the timeStamp column, reference the solutions if you get stuck on this step.**
+
+# In[20]:
+
+
+df['Hour'] = df['timeStamp'].apply(lambda x: x.hour)
+
+
+# In[22]:
+
+
+df['Month'] = df['timeStamp'].apply(lambda x: x.month)
+df['Day of week'] = df['timeStamp'].apply(lambda x: x.dayofweek)
 
