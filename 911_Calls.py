@@ -22,16 +22,11 @@
 # ____
 # ** Import numpy and pandas **
 
-# In[1]:
-
-
 import numpy as np
 import pandas as pd
 
 
 # ** Import visualization libraries and set %matplotlib inline. **
-
-# In[3]:
 
 
 import matplotlib.pyplot as plt
@@ -41,23 +36,17 @@ get_ipython().run_line_magic('matplotlib', 'inline')
 
 # ** Read in the csv file as a dataframe called df **
 
-# In[4]:
-
 
 df = pd.read_csv("911.csv")
 
 
 # ** Check the info() of the df **
 
-# In[6]:
-
 
 df.info()
 
 
 # ** Check the head of df **
-
-# In[8]:
 
 
 df.head(3)
@@ -67,23 +56,17 @@ df.head(3)
 
 # ** What are the top 5 zipcodes for 911 calls? **
 
-# In[15]:
-
 
 df['zip'].value_counts().head(5)
 
 
 # ** What are the top 5 townships (twp) for 911 calls? **
 
-# In[20]:
-
 
 df['twp'].value_counts().head(5)
 
 
 # ** Take a look at the 'title' column, how many unique title codes are there? **
-
-# In[136]:
 
 
 len(df['title'].unique())
@@ -95,13 +78,9 @@ len(df['title'].unique())
 # 
 # **For example, if the title column value is EMS: BACK PAINS/INJURY , the Reason column value would be EMS. **
 
-# In[41]:
-
 
 df['Reason'] = df['title'].apply(lambda x : x.split(':')[0])
 
-
-# In[45]:
 
 
 df['Reason'].value_counts()
@@ -109,15 +88,12 @@ df['Reason'].value_counts()
 
 # ** What is the most common Reason for a 911 call based off of this new column? **
 
-# In[50]:
-
 
 sns.countplot(df['Reason'])
 
 
 # ** Now use seaborn to create a countplot of 911 calls by Reason. **
 
-# In[49]:
 
 
 sns.countplot(x= 'Reason', data = df)
@@ -126,7 +102,6 @@ sns.countplot(x= 'Reason', data = df)
 # ___
 # ** Now let us begin to focus on time information. What is the data type of the objects in the timeStamp column? **
 
-# In[52]:
 
 
 type(df['timeStamp'][0])
