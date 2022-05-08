@@ -109,7 +109,6 @@ type(df['timeStamp'][0])
 
 # ** You should have seen that these timestamps are still strings. Use [pd.to_datetime](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.to_datetime.html) to convert the column from strings to DateTime objects. **
 
-# In[56]:
 
 
 df['timeStamp'] = pd.to_datetime(df['timeStamp'])
@@ -125,13 +124,8 @@ df['timeStamp'][0].dayofweek
 # 
 # **You can use Jupyter's tab method to explore the various attributes you can call. Now that the timestamp column are actually DateTime objects, use .apply() to create 3 new columns called Hour, Month, and Day of Week. You will create these columns based off of the timeStamp column, reference the solutions if you get stuck on this step.**
 
-# In[20]:
-
-
 df['Hour'] = df['timeStamp'].apply(lambda x: x.hour)
 
-
-# In[22]:
 
 
 df['Month'] = df['timeStamp'].apply(lambda x: x.month)
