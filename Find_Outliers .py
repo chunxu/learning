@@ -3,9 +3,6 @@
 
 # #Find Outliers in Data
 
-# In[1]:
-
-
 #import dependencies
 
 import pandas as pd
@@ -13,9 +10,6 @@ import pandas as pd
 import numpy as np
 
 import plotly.express as px
-
-
-# In[4]:
 
 
 #load the data into a dataframe
@@ -27,27 +21,17 @@ df = pd.read_csv("uber.csv")
 df.head()
 
 
-# In[6]:
-
 
 #drop the unnecessary columns
 
 df = df.drop(columns=(['pickup_longitude', 'pickup_latitude', 'dropoff_longitude', 'dropoff_latitude']))
 
 
-# In[7]:
-
-
 df.head()
-
-
-# In[9]:
 
 
 df.describe()[['fare_amount', 'passenger_count']]
 
-
-# In[11]:
 
 
 #create a histogram
@@ -57,7 +41,6 @@ fig = px.histogram(df, x='fare_amount')
 fig.show()
 
 
-# In[12]:
 
 
 #create a box plot
@@ -67,15 +50,12 @@ fig = px.box(df, y='fare_amount')
 fig.show()
 
 
-# In[14]:
-
 
 fig = px.scatter(x=df['passenger_count'], y=df['fare_amount'])
 
 fig.show()
 
 
-# In[15]:
 
 
 #create a function to find outliers using IQR
