@@ -73,8 +73,6 @@ def find_outliers_IQR(df):
    return outliers
 
 
-# In[20]:
-
 
 outliers = find_outliers_IQR(df['fare_amount'])
 
@@ -85,25 +83,16 @@ print('max outlier value: '+ str(outliers.max()))
 print('min outlier value: '+ str(outliers.min()))
 
 
-# In[21]:
-
 
 outliers
 
-
-# In[23]:
 
 
 outliers = find_outliers_IQR(df[['passenger_count','fare_amount']])
 
 
-# In[24]:
-
 
 outliers
-
-
-# In[28]:
 
 
 from scipy import stats
@@ -112,11 +101,9 @@ z = np.abs(stats.zscore(df['fare_amount']))
 print(z)
 
 
-# In[30]:
 
 
 threshold = 3
 print(np.where(z > threshold)) #row number
 
 
-# In[31]:
