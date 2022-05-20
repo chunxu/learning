@@ -135,3 +135,18 @@ df['Day of week'] = df['Day of week'].map({0:'Mon',1:'Tue',2:'Wed',3:'Thu',4:'Fr
 
 sns.countplot(x = 'Day of week', data = df, hue = 'Reason')
 plt.legend(loc = 2)
+
+
+# **Now do the same for Month:**
+
+sns.countplot(x = 'Month', data = df, hue = 'Reason')
+plt.legend(loc = 1)
+
+
+# **Did you notice something strange about the Plot?**
+# 
+# _____
+# 
+# ** You should have noticed it was missing some Months, let's see if we can maybe fill in this information by plotting the information in another way, possibly a simple line plot that fills in the missing months, in order to do this, we'll need to do some work with pandas... **
+
+# ** Now create a gropuby object called byMonth, where you group the DataFrame by the month column and use the count() method for aggregation. Use the head() method on this returned DataFrame. **
