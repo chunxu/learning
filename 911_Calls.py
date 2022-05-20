@@ -122,3 +122,16 @@ df['Hour'] = df['timeStamp'].apply(lambda x: x.hour)
 df['Month'] = df['timeStamp'].apply(lambda x: x.month)
 df['Day of week'] = df['timeStamp'].apply(lambda x: x.dayofweek)
 
+
+# ** Notice how the Day of Week is an integer 0-6. Use the .map() with this dictionary to map the actual string names to the day of the week: **
+# 
+#     dmap = {0:'Mon',1:'Tue',2:'Wed',3:'Thu',4:'Fri',5:'Sat',6:'Sun'}
+
+
+df['Day of week'] = df['Day of week'].map({0:'Mon',1:'Tue',2:'Wed',3:'Thu',4:'Fri',5:'Sat',6:'Sun'})
+
+
+# ** Now use seaborn to create a countplot of the Day of Week column with the hue based off of the Reason column. **
+
+sns.countplot(x = 'Day of week', data = df, hue = 'Reason')
+plt.legend(loc = 2)
