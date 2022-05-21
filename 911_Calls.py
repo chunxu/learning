@@ -169,3 +169,52 @@ sns.lmplot(x= 'Month', y = 'twp', data = byMonth.reset_index())
 # **Create a new column called 'Date' that contains the date from the timeStamp column. You'll need to use apply along with the .date() method. ** 
 
 df['Date'] = df['timeStamp'].apply(lambda x: x.date())
+
+# ** Now groupby this Date column with the count() aggregate and create a plot of counts of 911 calls.**
+
+byDate = df.groupby(df['Date']).count()
+
+
+byDate['lat'].plot()
+plt.tight_layout()
+
+
+
+# ** Now recreate this plot but create 3 separate plots with each plot representing a Reason for the 911 call**
+
+df[df['Reason'] == 'Traffic'].groupby('Date').count()['lat'].plot()
+#plt.title('traffic')
+plt.tight_layout()
+
+
+df[df['Reason'] == 'Fire'].groupby('Date').count()['lat'].plot()
+#plt.title('traffic')
+plt.tight_layout()
+
+
+df[df['Reason'] == 'EMS'].groupby('Date').count()['lat'].plot()
+#plt.title('traffic')
+plt.tight_layout()
+
+# ** Now let's move on to creating  heatmaps with seaborn and our data. We'll first need to restructure the dataframe so that the columns become the Hours and the Index becomes the Day of the Week. There are lots of ways to do this, but I would recommend trying to combine groupby with an [unstack](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.unstack.html) method. Reference the solutions if you get stuck on this!**
+
+
+df.groupby(['Day of week','Hour']).count().unstack()['lat']
+
+
+# ** Now create a HeatMap using this new DataFrame. **
+
+sns.heatmap(df.groupby(['Day of week','Hour']).count().unstack()['lat'], cmap='viridis')
+
+
+# ** Now create a clustermap using this DataFrame. **
+
+sns.clustermap(df.groupby(['Day of week','Hour']).count().unstack()['lat'], cmap='viridis')
+
+
+# ** Now repeat these same plots and operations, for a DataFrame that shows the Month as the column. **
+
+sns.heatmap(df.groupby(['Day of week','Month']).count().unstack()['lat'], cmap='viridis')
+
+
+sns.clustermap(df.groupby(['Day of week','Month']).count().unstack()['lat'], cmap='viridis')
