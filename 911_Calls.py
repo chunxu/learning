@@ -150,3 +150,22 @@ plt.legend(loc = 1)
 # ** You should have noticed it was missing some Months, let's see if we can maybe fill in this information by plotting the information in another way, possibly a simple line plot that fills in the missing months, in order to do this, we'll need to do some work with pandas... **
 
 # ** Now create a gropuby object called byMonth, where you group the DataFrame by the month column and use the count() method for aggregation. Use the head() method on this returned DataFrame. **
+
+byMonth = df.groupby('Month').count()
+
+byMonth.head()
+
+
+# ** Now create a simple plot off of the dataframe indicating the count of calls per month. **
+
+byMonth['lat'].plot()
+
+
+# ** Now see if you can use seaborn's lmplot() to create a linear fit on the number of calls per month. Keep in mind you may need to reset the index to a column. **
+
+sns.lmplot(x= 'Month', y = 'twp', data = byMonth.reset_index())
+
+
+# **Create a new column called 'Date' that contains the date from the timeStamp column. You'll need to use apply along with the .date() method. ** 
+
+df['Date'] = df['timeStamp'].apply(lambda x: x.date())
