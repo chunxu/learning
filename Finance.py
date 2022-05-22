@@ -84,6 +84,23 @@ bank_stocks = pd.concat([BAC,C], axis=1, keys = tickers)
 
 bank_stocks.columns.names = ['Bank Ticker','Stock Info']
 
-# ** Check the head of the bank_stocks dataframe.**
 
-bank_stocks.head(2)
+bank_stocks['BAC']['High'][0]
+
+
+# # EDA
+# 
+# Let's explore the data a bit! Before continuing, I encourage you to check out the documentation on [Multi-Level Indexing](http://pandas.pydata.org/pandas-docs/stable/advanced.html) and [Using .xs](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.xs.html).
+# Reference the solutions if you can not figure out how to use .xs(), since that will be a major part of this project.
+# 
+# ** What is the max Close price for each bank's stock throughout the time period?**
+
+for name in tickers:
+    print(name, bank_stocks[name]['Close'].max())
+
+# ** Create a new empty DataFrame called returns. This dataframe will contain the returns for each bank's stock. returns are typically defined by:**
+# 
+# $$r_t = \frac{p_t - p_{t-1}}{p_{t-1}} = \frac{p_t}{p_{t-1}} - 1$$
+
+bank_stocks.xs(key = 'Close', axis = 1, level = 'Stock Info').max()
+
