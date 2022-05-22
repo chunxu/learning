@@ -178,3 +178,29 @@ BAC['Close'].loc['2008-1-1':'2008-12-31'].rolling(window=30).mean().plot(label =
 BAC['Close'].loc['2008-1-1':'2008-12-31'].plot()
 plt.legend()
 
+
+# ** Create a heatmap of the correlation between the stocks Close Price.**
+
+sns.heatmap(bank_stocks.xs(key = 'Close', axis =1, level = 'Stock Info').corr(), annot=True)
+
+# ** Optional: Use seaborn's clustermap to cluster the correlations together:**
+
+sns.clustermap(bank_stocks.xs(key = 'Close', axis =1, level = 'Stock Info').corr(), annot=True)
+
+
+# # Part 2 (Optional)
+# 
+# In this second part of the project we will rely on the cufflinks library to create some Technical Analysis plots. This part of the project is experimental due to its heavy reliance on the cuffinks project, so feel free to skip it if any functionality is broken in the future.
+
+# ** Use .iplot(kind='candle) to create a candle plot of Bank of America's stock from Jan 1st 2015 to Jan 1st 2016.**
+
+BAC.loc['2015-01-01':'2016-01-01'].iplot(kind = 'candle')
+
+# ** Use .ta_plot(study='sma') to create a Simple Moving Averages plot of Morgan Stanley for the year 2015.**
+
+BAC['Close'].loc['2015-01-01':'2016-01-01'].ta_plot(study = 'sma', periods =[13,21,55])
+
+
+# **Use .ta_plot(study='boll') to create a Bollinger Band Plot for Bank of America for the year 2015.**
+
+BAC['Close'].loc['2015-01-01':'2016-01-01'].ta_plot(study = 'boll')
