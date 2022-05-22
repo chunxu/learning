@@ -104,3 +104,41 @@ for name in tickers:
 
 bank_stocks.xs(key = 'Close', axis = 1, level = 'Stock Info').max()
 
+
+#returns
+
+
+# ** We can use pandas pct_change() method on the Close column to create a column representing this return value. Create a for loop that goes and for each Bank Stock Ticker creates this returns column and set's it as a column in the returns DataFrame.**
+
+returns = pd.DataFrame()
+for name in tickers:
+    returns[name+'_return'] = bank_stocks[name]['Close'].pct_change()
+    
+
+# ** Create a pairplot using seaborn of the returns dataframe. What stock stands out to you? Can you figure out why?**
+
+import seaborn as sns
+sns.pairplot(returns)
+
+
+# * See solution for details about Citigroup behavior....
+
+# ** Using this returns DataFrame, figure out on what dates each bank stock had the best and worst single day returns. You should notice that 4 of the banks share the same day for the worst drop, did anything significant happen that day?**
+
+returns.idxmin()
+
+returns.idxmax()
+
+returns.std()
+
+returns.loc['2015-01-01':'2015-12-31'].std()
+
+# ** Create a distplot using seaborn of the 2015 returns for Morgan Stanley **
+
+sns.displot(returns['BAC_return'].loc['2015-01-01':'2015-12-31'])
+
+# ** Create a distplot using seaborn of the 2008 returns for CitiGroup **
+
+sns.displot(returns['C_return'].loc['2008-01-01':'2008-12-31'],color='red', bins=50)
+
+    
