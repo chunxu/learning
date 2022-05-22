@@ -142,3 +142,39 @@ sns.displot(returns['BAC_return'].loc['2015-01-01':'2015-12-31'])
 sns.displot(returns['C_return'].loc['2008-01-01':'2008-12-31'],color='red', bins=50)
 
     
+
+# # More Visualization
+# 
+# A lot of this project will focus on visualizations. Feel free to use any of your preferred visualization libraries to try to recreate the described plots below, seaborn, matplotlib, plotly and cufflinks, or just pandas.
+# 
+# ### Imports
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set_style('whitegrid')
+get_ipython().run_line_magic('matplotlib', 'inline')
+
+# Optional Plotly Method Imports
+import plotly
+import cufflinks as cf
+cf.go_offline()
+
+
+# ** Create a line plot showing Close price for each bank for the entire index of time. (Hint: Try using a for loop, or use [.xs](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.xs.html) to get a cross section of the data.)**
+
+for name in tickers:
+    bank_stocks[name]['Close'].plot(label = name)
+plt.legend()
+
+bank_stocks.xs(key = 'Close', axis =1, level = 'Stock Info').plot()
+
+# ## Moving Averages
+# 
+# Let's analyze the moving averages for these stocks in the year 2008. 
+# 
+# ** Plot the rolling 30 day average against the Close Price for Bank Of America's stock for the year 2008**
+
+BAC['Close'].loc['2008-1-1':'2008-12-31'].rolling(window=30).mean().plot(label = 'rolling')
+BAC['Close'].loc['2008-1-1':'2008-12-31'].plot()
+plt.legend()
+
