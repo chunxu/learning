@@ -144,9 +144,7 @@ plt.legend(loc = 1)
 
 
 # **Did you notice something strange about the Plot?**
-# 
-# _____
-# 
+
 # ** You should have noticed it was missing some Months, let's see if we can maybe fill in this information by plotting the information in another way, possibly a simple line plot that fills in the missing months, in order to do this, we'll need to do some work with pandas... **
 
 # ** Now create a gropuby object called byMonth, where you group the DataFrame by the month column and use the count() method for aggregation. Use the head() method on this returned DataFrame. **
@@ -177,7 +175,6 @@ byDate = df.groupby(df['Date']).count()
 
 byDate['lat'].plot()
 plt.tight_layout()
-
 
 
 # ** Now recreate this plot but create 3 separate plots with each plot representing a Reason for the 911 call**
@@ -213,7 +210,6 @@ sns.clustermap(df.groupby(['Day of week','Hour']).count().unstack()['lat'], cmap
 
 
 # ** Now repeat these same plots and operations, for a DataFrame that shows the Month as the column. **
-
 sns.heatmap(df.groupby(['Day of week','Month']).count().unstack()['lat'], cmap='viridis')
 
 
