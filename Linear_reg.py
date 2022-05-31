@@ -75,3 +75,13 @@ lm = LinearRegression()
 
 lm.fit(X_train,y_train)
 
+
+# ## Model Evaluation
+# 
+# Let's evaluate the model by checking out it's coefficients and how we can interpret them.
+
+# print the intercept
+print(lm.intercept_)
+
+coeff_df = pd.DataFrame(lm.coef_,X.columns,columns=['Coefficient'])
+coeff_df
