@@ -85,3 +85,49 @@ print(lm.intercept_)
 
 coeff_df = pd.DataFrame(lm.coef_,X.columns,columns=['Coefficient'])
 coeff_df
+
+
+# Interpreting the coefficients:
+# 
+# - Holding all other features fixed, a 1 unit increase in **Avg. Area Income** is associated with an **increase of \$21.52 **.
+# - Holding all other features fixed, a 1 unit increase in **Avg. Area House Age** is associated with an **increase of \$164883.28 **.
+# - Holding all other features fixed, a 1 unit increase in **Avg. Area Number of Rooms** is associated with an **increase of \$122368.67 **.
+# - Holding all other features fixed, a 1 unit increase in **Avg. Area Number of Bedrooms** is associated with an **increase of \$2233.80 **.
+# - Holding all other features fixed, a 1 unit increase in **Area Population** is associated with an **increase of \$15.15 **.
+# 
+predictions = lm.predict(X_test)
+
+plt.scatter(y_test,predictions)
+
+sns.distplot((y_test-predictions),bins=50);
+
+# ## Regression Evaluation Metrics
+# 
+# 
+# Here are three common evaluation metrics for regression problems:
+# 
+# **Mean Absolute Error** (MAE) is the mean of the absolute value of the errors:
+# 
+# $$\frac 1n\sum_{i=1}^n|y_i-\hat{y}_i|$$
+# 
+# **Mean Squared Error** (MSE) is the mean of the squared errors:
+# 
+# $$\frac 1n\sum_{i=1}^n(y_i-\hat{y}_i)^2$$
+# 
+# **Root Mean Squared Error** (RMSE) is the square root of the mean of the squared errors:
+# 
+# $$\sqrt{\frac 1n\sum_{i=1}^n(y_i-\hat{y}_i)^2}$$
+# 
+# Comparing these metrics:
+# 
+# - **MAE** is the easiest to understand, because it's the average error.
+# - **MSE** is more popular than MAE, because MSE "punishes" larger errors, which tends to be useful in the real world.
+# - **RMSE** is even more popular than MSE, because RMSE is interpretable in the "y" units.
+# 
+# All of these are **loss functions**, because we want to minimize them.
+
+from sklearn import metrics
+
+print('MAE:', metrics.mean_absolute_error(y_test, predictions))
+print('MSE:', metrics.mean_squared_error(y_test, predictions))
+print('RMSE:', np.sqrt(metrics.mean_squared_error(y_test, predictions)))
