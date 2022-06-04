@@ -49,3 +49,47 @@ import cufflinks as cf
 cf.go_offline()
 
 train['Fare'].iplot(kind='hist',bins=30,color='green')
+# ## Data Cleaning
+
+plt.figure(figsize=(12, 7))
+sns.boxplot(x='Pclass',y='Age',data=train,palette='winter')
+
+
+def impute_age(cols):
+    Age = cols[0]
+    Pclass = cols[1]
+    
+    if pd.isnull(Age):
+
+        if Pclass == 1:
+            return 37
+
+        elif Pclass == 2:
+            return 29
+
+        else:
+            return 24
+
+    else:
+        return Age
+
+
+# Now apply that function!
+
+train['Age'] = train[['Age','Pclass']].apply(impute_age,axis=1)
+
+sns.heatmap(train.isnull(),yticklabels=False,cbar=False,cmap='viridis')
+
+
+train.drop('Cabin',axis=1,inplace=True)
+
+train.dropna(inplace=True)
+
+# We'll need to convert categorical features to dummy variables using pandas! Otherwise our machine learning algorithm won't be able to directly take in those features as inputs.
+
+sex = pd.get_dummies(train['Sex'],drop_first=True)
+embark = pd.get_dummies(train['Embarked'],drop_first=True)
+
+train.drop(['Sex','Embarked','Name','Ticket'],axis=1,inplace=True)
+
+train = pd.concat([train,sex,embark],axis=1)
