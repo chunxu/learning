@@ -93,3 +93,21 @@ embark = pd.get_dummies(train['Embarked'],drop_first=True)
 train.drop(['Sex','Embarked','Name','Ticket'],axis=1,inplace=True)
 
 train = pd.concat([train,sex,embark],axis=1)
+
+
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(train.drop('Survived',axis=1), 
+                                                    train['Survived'], test_size=0.30, 
+                                                    random_state=101)
+
+from sklearn.linear_model import LogisticRegression
+
+logmodel = LogisticRegression()
+logmodel.fit(X_train,y_train)
+
+predictions = logmodel.predict(X_test)
+
+from sklearn.metrics import classification_report
+
+print(classification_report(y_test,predictions))
