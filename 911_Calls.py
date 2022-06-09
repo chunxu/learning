@@ -200,17 +200,13 @@ df.groupby(['Day of week','Hour']).count().unstack()['lat']
 
 
 # ** Now create a HeatMap using this new DataFrame. **
-
 sns.heatmap(df.groupby(['Day of week','Hour']).count().unstack()['lat'], cmap='viridis')
 
 
 # ** Now create a clustermap using this DataFrame. **
-
 sns.clustermap(df.groupby(['Day of week','Hour']).count().unstack()['lat'], cmap='viridis')
 
 
 # ** Now repeat these same plots and operations, for a DataFrame that shows the Month as the column. **
 sns.heatmap(df.groupby(['Day of week','Month']).count().unstack()['lat'], cmap='viridis')
-
-
 sns.clustermap(df.groupby(['Day of week','Month']).count().unstack()['lat'], cmap='viridis')
