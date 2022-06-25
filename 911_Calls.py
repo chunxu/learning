@@ -52,20 +52,14 @@ df.head(3)
 # ## Basic Questions
 
 # ** What are the top 5 zipcodes for 911 calls? **
-
-
 df['zip'].value_counts().head(5)
 
 
 # ** What are the top 5 townships (twp) for 911 calls? **
-
-
 df['twp'].value_counts().head(5)
 
 
 # ** Take a look at the 'title' column, how many unique title codes are there? **
-
-
 len(df['title'].unique())
 
 
@@ -75,10 +69,7 @@ len(df['title'].unique())
 # 
 # **For example, if the title column value is EMS: BACK PAINS/INJURY , the Reason column value would be EMS. **
 
-
 df['Reason'] = df['title'].apply(lambda x : x.split(':')[0])
-
-
 
 df['Reason'].value_counts()
 
