@@ -21,3 +21,10 @@ scaled_features = scaler.transform(df.drop('TARGET CLASS',axis=1))
 
 df_feat = pd.DataFrame(scaled_features,columns=df.columns[:-1])
 df_feat.head()
+
+# ## Train Test Split
+
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(scaled_features,df['TARGET CLASS'],
+                                                    test_size=0.30)
