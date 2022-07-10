@@ -1,4 +1,4 @@
-#generate word could
+#generate word could based on word input
 import numpy as np
 import pandas as pd
 from os import path
@@ -16,3 +16,5 @@ plt.figure()
 plt.imshow(wordcloud, interpolation="bilinear")
 plt.axis("off")
 plt.show()
+
+#font size based on the order of words
