@@ -1,4 +1,4 @@
-#Statistical Hypothesis Tests
+#Statistical Hypothesis Tests in python
 
 
 # Example of the Student's t-test
