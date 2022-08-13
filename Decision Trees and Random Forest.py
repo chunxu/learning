@@ -50,22 +50,13 @@ loans = pd.read_csv('loan_data.csv')
 
 
 # ** Check out the info(), head(), and describe() methods on loans.**
-
-
-
 loans.info()
-
-
-
 loans.describe()
-
-
 loans.head()
-
 
 # # Exploratory Data Analysis
 # 
-# Let's do some data visualization! We'll use seaborn and pandas built-in plotting capabilities, but feel free to use whatever library you want. Don't worry about the colors matching, just worry about getting the main idea of the plot.
+# data visualization! We'll use seaborn and pandas built-in plotting capabilities, but feel free to use whatever library you want. Don't worry about the colors matching, just worry about getting the main idea of the plot.
 # 
 # ** Create a histogram of two FICO distributions on top of each other, one for each credit.policy outcome.**
 # 
@@ -95,25 +86,18 @@ plt.xlabel('FICO')
 
 # ** Create a countplot using seaborn showing the counts of loans by purpose, with the color hue defined by not.fully.paid. **
 
-
-
 plt.figure(figsize=(11,7))
 sns.countplot(x='purpose',hue='not.fully.paid',data=loans,palette='Set1')
 
-
 # ** Let's see the trend between FICO score and interest rate. Recreate the following jointplot.**
-
 
 sns.jointplot(x='fico',y='int.rate',data=loans,color='purple')
 
-
 # ** Create the following lmplots to see if the trend differed between not.fully.paid and credit.policy. Check the documentation for lmplot() if you can't figure out how to separate it into columns.**
-
 
 plt.figure(figsize=(11,7))
 sns.lmplot(y='int.rate',x='fico',data=loans,hue='credit.policy',
            col='not.fully.paid',palette='Set1')
-
 
 # # Setting up the Data
 # 
