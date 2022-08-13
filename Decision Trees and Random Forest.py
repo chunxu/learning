@@ -43,11 +43,7 @@ get_ipython().run_line_magic('matplotlib', 'inline')
 # ## Get the Data
 # 
 # ** Use pandas to read loan_data.csv as a dataframe called loans.**
-
-
-
 loans = pd.read_csv('loan_data.csv')
-
 
 # ** Check out the info(), head(), and describe() methods on loans.**
 loans.info()
@@ -125,11 +121,7 @@ cat_feats = ['purpose']
 
 # **Now use pd.get_dummies(loans,columns=cat_feats,drop_first=True) to create a fixed larger dataframe that has new feature columns with dummy variables. Set this dataframe as final_data.**
 
-
-
 final_data = pd.get_dummies(loans,columns=cat_feats,drop_first=True)
-
-
 
 final_data.info()
 
@@ -166,27 +158,15 @@ from sklearn.tree import DecisionTreeClassifier
 
 dtree = DecisionTreeClassifier()
 
-
-
 dtree.fit(X_train,y_train)
-
 
 # ## Predictions and Evaluation of Decision Tree
 # **Create predictions from the test set and create a classification report and a confusion matrix.**
 
-
-
 predictions = dtree.predict(X_test)
-
-
-
 from sklearn.metrics import classification_report,confusion_matrix
 
-
-
-
 print(classification_report(y_test,predictions))
-
 
 print(confusion_matrix(y_test,predictions))
 
