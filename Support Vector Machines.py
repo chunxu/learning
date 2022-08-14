@@ -61,9 +61,6 @@ Image(url,width=300, height=300)
 # 
 # **Use seaborn to get the iris data by using: iris = sns.load_dataset('iris') **
 
-# In[24]:
-
-
 import seaborn as sns
 iris = sns.load_dataset('iris')
 
@@ -76,7 +73,6 @@ iris = sns.load_dataset('iris')
 # 
 # **Import some libraries you think you'll need.**
 
-# In[25]:
 
 
 import pandas as pd
@@ -86,7 +82,6 @@ get_ipython().run_line_magic('matplotlib', 'inline')
 
 # ** Create a pairplot of the data set. Which flower species seems to be the most separable?**
 
-# In[37]:
 
 
 # Setosa is the most separable. 
@@ -94,8 +89,6 @@ sns.pairplot(iris,hue='species',palette='Dark2')
 
 
 # **Create a kde plot of sepal_length versus sepal width for setosa species of flower.**
-
-# In[44]:
 
 
 setosa = iris[iris['species']=='setosa']
@@ -107,14 +100,9 @@ sns.kdeplot( setosa['sepal_width'], setosa['sepal_length'],
 # 
 # ** Split your data into a training set and a testing set.**
 
-# In[45]:
 
 
 from sklearn.model_selection import train_test_split
-
-
-# In[47]:
-
 
 X = iris.drop('species',axis=1)
 y = iris['species']
@@ -127,19 +115,13 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30)
 # 
 # **Call the SVC() model from sklearn and fit the model to the training data.**
 
-# In[48]:
 
 
 from sklearn.svm import SVC
 
 
-# In[49]:
-
 
 svc_model = SVC()
-
-
-# In[50]:
 
 
 svc_model.fit(X_train,y_train)
@@ -149,25 +131,15 @@ svc_model.fit(X_train,y_train)
 # 
 # **Now get predictions from the model and create a confusion matrix and a classification report.**
 
-# In[51]:
-
 
 predictions = svc_model.predict(X_test)
 
-
-# In[52]:
 
 
 from sklearn.metrics import classification_report,confusion_matrix
 
 
-# In[53]:
-
-
 print(confusion_matrix(y_test,predictions))
-
-
-# In[54]:
 
 
 print(classification_report(y_test,predictions))
@@ -179,23 +151,16 @@ print(classification_report(y_test,predictions))
 # 
 # ** Import GridsearchCV from SciKit Learn.**
 
-# In[55]:
-
 
 from sklearn.model_selection import GridSearchCV
 
 
 # **Create a dictionary called param_grid and fill out some parameters for C and gamma.**
 
-# In[57]:
-
-
 param_grid = {'C': [0.1,1, 10, 100], 'gamma': [1,0.1,0.01,0.001]} 
 
 
 # ** Create a GridSearchCV object and fit it to the training data.**
-
-# In[58]:
 
 
 grid = GridSearchCV(SVC(),param_grid,refit=True,verbose=2)
@@ -204,19 +169,11 @@ grid.fit(X_train,y_train)
 
 # ** Now take that grid model and create some predictions using the test set and create classification reports and confusion matrices for them. Were you able to improve?**
 
-# In[59]:
-
-
 grid_predictions = grid.predict(X_test)
-
-
-# In[60]:
 
 
 print(confusion_matrix(y_test,grid_predictions))
 
-
-# In[61]:
 
 
 print(classification_report(y_test,grid_predictions))
