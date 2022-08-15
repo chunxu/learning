@@ -107,27 +107,16 @@ g = g.map(plt.hist,'Grad.Rate',bins=20,alpha=0.7)
 
 # ** Notice how there seems to be a private school with a graduation rate of higher than 100%.What is the name of that school?**
 
-# In[113]:
-
 
 df[df['Grad.Rate'] > 100]
 
 
 # ** Set that school's graduation rate to 100 so it makes sense. You may get a warning not an error) when doing this operation, so use dataframe operations or just re-do the histogram visualization to make sure it actually went through.**
 
-# In[93]:
-
-
 df['Grad.Rate']['Cazenovia College'] = 100
 
 
-# In[94]:
-
-
 df[df['Grad.Rate'] > 100]
-
-
-# In[95]:
 
 
 sns.set_style('darkgrid')
@@ -141,15 +130,10 @@ g = g.map(plt.hist,'Grad.Rate',bins=20,alpha=0.7)
 # 
 # ** Import KMeans from SciKit Learn.**
 
-# In[114]:
-
-
 from sklearn.cluster import KMeans
 
 
 # ** Create an instance of a K Means model with 2 clusters.**
-
-# In[115]:
 
 
 kmeans = KMeans(n_clusters=2)
@@ -157,15 +141,11 @@ kmeans = KMeans(n_clusters=2)
 
 # **Fit the model to all the data except for the Private label.**
 
-# In[116]:
-
 
 kmeans.fit(df.drop('Private',axis=1))
 
 
 # ** What are the cluster center vectors?**
-
-# In[117]:
 
 
 kmeans.cluster_centers_
@@ -177,32 +157,18 @@ kmeans.cluster_centers_
 # 
 # ** Create a new column for df called 'Cluster', which is a 1 for a Private school, and a 0 for a public school.**
 
-# In[118]:
-
-
 def converter(cluster):
     if cluster=='Yes':
         return 1
     else:
         return 0
 
-
-# In[119]:
-
-
 df['Cluster'] = df['Private'].apply(converter)
-
-
-# In[122]:
-
 
 df.head()
 
 
 # ** Create a confusion matrix and classification report to see how well the Kmeans clustering worked without being given any labels.**
-
-# In[123]:
-
 
 from sklearn.metrics import confusion_matrix,classification_report
 print(confusion_matrix(df['Cluster'],kmeans.labels_))
