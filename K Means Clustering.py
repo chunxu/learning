@@ -55,29 +55,17 @@ get_ipython().run_line_magic('matplotlib', 'inline')
 
 # ** Read in the College_Data file using read_csv. Figure out how to set the first column as the index.**
 
-# In[104]:
-
-
 df = pd.read_csv('College_Data',index_col=0)
 
 
 # **Check the head of the data**
-
-# In[105]:
-
 
 df.head()
 
 
 # ** Check the info() and describe() methods on the data.**
 
-# In[106]:
-
-
 df.info()
-
-
-# In[107]:
 
 
 df.describe()
@@ -89,7 +77,6 @@ df.describe()
 # 
 # ** Create a scatterplot of Grad.Rate versus Room.Board where the points are colored by the Private column. **
 
-# In[111]:
 
 
 sns.set_style('whitegrid')
@@ -99,9 +86,6 @@ sns.lmplot('Room.Board','Grad.Rate',data=df, hue='Private',
 
 # **Create a scatterplot of F.Undergrad versus Outstate where the points are colored by the Private column.**
 
-# In[112]:
-
-
 sns.set_style('whitegrid')
 sns.lmplot('Outstate','F.Undergrad',data=df, hue='Private',
            palette='coolwarm',size=6,aspect=1,fit_reg=False)
@@ -109,18 +93,12 @@ sns.lmplot('Outstate','F.Undergrad',data=df, hue='Private',
 
 # ** Create a stacked histogram showing Out of State Tuition based on the Private column. Try doing this using [sns.FacetGrid](https://stanford.edu/~mwaskom/software/seaborn/generated/seaborn.FacetGrid.html). If that is too tricky, see if you can do it just by using two instances of pandas.plot(kind='hist'). **
 
-# In[109]:
-
-
 sns.set_style('darkgrid')
 g = sns.FacetGrid(df,hue="Private",palette='coolwarm',size=6,aspect=2)
 g = g.map(plt.hist,'Outstate',bins=20,alpha=0.7)
 
 
 # **Create a similar histogram for the Grad.Rate column.**
-
-# In[110]:
-
 
 sns.set_style('darkgrid')
 g = sns.FacetGrid(df,hue="Private",palette='coolwarm',size=6,aspect=2)
