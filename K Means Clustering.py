@@ -41,8 +41,6 @@
 # 
 # ** Import the libraries you usually use for data analysis.**
 
-# In[103]:
-
 
 import pandas as pd
 import numpy as np
