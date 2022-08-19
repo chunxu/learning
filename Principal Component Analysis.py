@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# ___
-# 
 # <a href='http://www.pieriandata.com'> <img src='../Pierian_Data_Logo.png' /></a>
 # ___
 
@@ -29,20 +27,13 @@ get_ipython().run_line_magic('matplotlib', 'inline')
 
 
 # ## The Data
-# 
 # Let's work with the cancer data set again since it had so many features.
-
-
 
 from sklearn.datasets import load_breast_cancer
 
-
 cancer = load_breast_cancer()
 
-
-
 cancer.keys()
-
 
 print(cancer['DESCR'])
 
