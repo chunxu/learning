@@ -17,8 +17,6 @@
 # 
 # ## Import Libraries
 
-# In[1]:
-
 
 import numpy as np
 import pandas as pd
@@ -26,22 +24,12 @@ import pandas as pd
 
 # ## Get the Data
 
-# In[2]:
-
-
 column_names = ['user_id', 'item_id', 'rating', 'timestamp']
 df = pd.read_csv('u.data', sep='\t', names=column_names)
-
-
-# In[3]:
-
-
 df.head()
 
 
 # Now let's get the movie titles:
-
-# In[4]:
 
 
 movie_titles = pd.read_csv("Movie_Id_Titles")
@@ -49,9 +37,6 @@ movie_titles.head()
 
 
 # We can merge them together:
-
-# In[7]:
-
 
 df = pd.merge(df,movie_titles,on='item_id')
 df.head()
@@ -63,8 +48,6 @@ df.head()
 # 
 # ## Visualization Imports
 
-# In[8]:
-
 
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -73,9 +56,6 @@ get_ipython().run_line_magic('matplotlib', 'inline')
 
 
 # Let's create a ratings dataframe with average rating and number of ratings:
-
-# In[9]:
-
 
 df.groupby('title')['rating'].mean().sort_values(ascending=False).head()
 
