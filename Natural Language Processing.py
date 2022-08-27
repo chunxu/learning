@@ -153,8 +153,6 @@ nb = MultinomialNB()
 
 # **Now fit nb using the training data.**
 
-# In[123]:
-
 
 nb.fit(X_train,y_train)
 
@@ -165,22 +163,12 @@ nb.fit(X_train,y_train)
 # 
 # **Use the predict method off of nb to predict labels from X_test.**
 
-# In[124]:
-
-
 predictions = nb.predict(X_test)
 
 
 # ** Create a confusion matrix and classification report using these predictions and y_test **
 
-# In[82]:
-
-
 from sklearn.metrics import confusion_matrix,classification_report
-
-
-# In[125]:
-
 
 print(confusion_matrix(y_test,predictions))
 print('\n')
@@ -193,24 +181,15 @@ print(classification_report(y_test,predictions))
 # 
 # ** Import TfidfTransformer from sklearn. **
 
-# In[155]:
-
-
 from sklearn.feature_extraction.text import  TfidfTransformer
 
 
 # ** Import Pipeline from sklearn. **
 
-# In[156]:
-
-
 from sklearn.pipeline import Pipeline
 
 
 # ** Now create a pipeline with the following steps:CountVectorizer(), TfidfTransformer(),MultinomialNB()**
-
-# In[157]:
-
 
 pipeline = Pipeline([
     ('bow', CountVectorizer()),  # strings to token integer counts
@@ -227,18 +206,12 @@ pipeline = Pipeline([
 # 
 # **Redo the train test split on the yelp_class object.**
 
-# In[158]:
-
-
 X = yelp_class['text']
 y = yelp_class['stars']
 X_train, X_test, y_train, y_test = train_test_split(X, y,test_size=0.3,random_state=101)
 
 
 # **Now fit the pipeline to the training data. Remember you can't use the same training data as last time because that data has already been vectorized. We need to pass in just the text and labels**
-
-# In[159]:
-
 
 # May take some time
 pipeline.fit(X_train,y_train)
@@ -248,13 +221,8 @@ pipeline.fit(X_train,y_train)
 # 
 # ** Now use the pipeline to predict from the X_test and create a classification report and confusion matrix. You should notice strange results.**
 
-# In[153]:
-
 
 predictions = pipeline.predict(X_test)
-
-
-# In[154]:
 
 
 print(confusion_matrix(y_test,predictions))
@@ -262,8 +230,3 @@ print(classification_report(y_test,predictions))
 
 
 # Looks like Tf-Idf actually made things worse! That is it for this project. But there is still a lot more you can play with:
-# 
-# **Some other things to try....**
-# Try going back and playing around with the pipeline steps and seeing if creating a custom analyzer like we did in the lecture helps (note: it probably won't). Or recreate the pipeline with just the CountVectorizer() and NaiveBayes. Does changing the ML model at the end to another classifier help at all?
-
-# # Great Job!
