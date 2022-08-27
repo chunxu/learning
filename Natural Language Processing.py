@@ -27,8 +27,6 @@
 # ## Imports
 #  **Import the usual suspects. :) **
 
-# In[94]:
-
 
 import numpy as np
 import pandas as pd
@@ -38,36 +36,22 @@ import pandas as pd
 # 
 # **Read the yelp.csv file and set it as a dataframe called yelp.**
 
-# In[95]:
-
 
 yelp = pd.read_csv('yelp.csv')
 
 
 # ** Check the head, info , and describe methods on yelp.**
 
-# In[96]:
-
-
 yelp.head()
 
 
-# In[97]:
-
-
 yelp.info()
-
-
-# In[99]:
 
 
 yelp.describe()
 
 
 # **Create a new column called "text length" which is the number of words in the text column.**
-
-# In[100]:
-
 
 yelp['text length'] = yelp['text'].apply(len)
 
@@ -80,9 +64,6 @@ yelp['text length'] = yelp['text'].apply(len)
 # 
 # **Import the data visualization libraries if you haven't done so already.**
 
-# In[101]:
-
-
 import matplotlib.pyplot as plt
 import seaborn as sns
 sns.set_style('white')
@@ -91,33 +72,21 @@ get_ipython().run_line_magic('matplotlib', 'inline')
 
 # **Use FacetGrid from the seaborn library to create a grid of 5 histograms of text length based off of the star ratings. Reference the seaborn documentation for hints on this**
 
-# In[102]:
-
-
 g = sns.FacetGrid(yelp,col='stars')
 g.map(plt.hist,'text length')
 
 
 # **Create a boxplot of text length for each star category.**
 
-# In[103]:
-
-
 sns.boxplot(x='stars',y='text length',data=yelp,palette='rainbow')
 
 
 # **Create a countplot of the number of occurrences for each type of star rating.**
 
-# In[104]:
-
-
 sns.countplot(x='stars',data=yelp,palette='rainbow')
 
 
 # ** Use groupby to get the mean values of the numerical columns, you should be able to create this dataframe with the operation:**
-
-# In[105]:
-
 
 stars = yelp.groupby('stars').mean()
 stars
@@ -125,16 +94,10 @@ stars
 
 # **Use the corr() method on that groupby dataframe to produce this dataframe:**
 
-# In[106]:
-
-
 stars.corr()
 
 
 # **Then use seaborn to create a heatmap based off that .corr() dataframe:**
-
-# In[38]:
-
 
 sns.heatmap(stars.corr(),cmap='coolwarm',annot=True)
 
@@ -145,16 +108,10 @@ sns.heatmap(stars.corr(),cmap='coolwarm',annot=True)
 # 
 # **Create a dataframe called yelp_class that contains the columns of yelp dataframe but for only the 1 or 5 star reviews.**
 
-# In[107]:
-
-
 yelp_class = yelp[(yelp.stars==1) | (yelp.stars==5)]
 
 
 # ** Create two objects X and y. X will be the 'text' column of yelp_class and y will be the 'stars' column of yelp_class. (Your features and target/labels)**
-
-# In[117]:
-
 
 X = yelp_class['text']
 y = yelp_class['stars']
@@ -162,17 +119,11 @@ y = yelp_class['stars']
 
 # **Import CountVectorizer and create a CountVectorizer object.**
 
-# In[118]:
-
-
 from sklearn.feature_extraction.text import CountVectorizer
 cv = CountVectorizer()
 
 
 # ** Use the fit_transform method on the CountVectorizer object and pass in X (the 'text' column). Save this result by overwriting X.**
-
-# In[119]:
-
 
 X = cv.fit_transform(X)
 
@@ -183,13 +134,7 @@ X = cv.fit_transform(X)
 # 
 # ** Use train_test_split to split up the data into X_train, X_test, y_train, y_test. Use test_size=0.3 and random_state=101 **
 
-# In[120]:
-
-
 from sklearn.model_selection import train_test_split
-
-
-# In[121]:
 
 
 X_train, X_test, y_train, y_test = train_test_split(X, y,test_size=0.3,random_state=101)
@@ -200,8 +145,6 @@ X_train, X_test, y_train, y_test = train_test_split(X, y,test_size=0.3,random_st
 # Time to train a model!
 # 
 # ** Import MultinomialNB and create an instance of the estimator and call is nb **
-
-# In[122]:
 
 
 from sklearn.naive_bayes import MultinomialNB
