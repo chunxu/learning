@@ -51,17 +51,9 @@ import matplotlib.pyplot as plt
 get_ipython().run_line_magic('matplotlib', 'inline')
 
 
-
-
 mnist.train.images[1].shape
 
-
-
-
 plt.imshow(mnist.train.images[1].reshape(28,28))
-
-
-
 
 plt.imshow(mnist.train.images[1].reshape(28,28),cmap='gist_gray')
 
@@ -105,13 +97,7 @@ optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.5)
 
 train = optimizer.minimize(cross_entropy)
 
-
-
-
-
 init = tf.global_variables_initializer()
-
-
 
 with tf.Session() as sess:
     sess.run(init)
@@ -134,4 +120,3 @@ with tf.Session() as sess:
 
 
 # While this may seem pretty good, we can actually do much better, the best models can get above 99% accuracy.
-# 
