@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 # coding: utf-8
-
-# ___
 # 
 # <a href='http://www.pieriandata.com'> <img src='../Pierian_Data_Logo.png' /></a>
 # ___
@@ -18,49 +16,32 @@
 # 
 # Let's get the data:
 
-# In[1]:
-
-
 import pandas as pd
 
-
 df = pd.read_csv('iris.csv')
-
-
 df.head()
-
-
 df.columns = ['sepal_length','sepal_width','petal_length','petal_width','target']
 
 X = df.drop('target',axis=1)
 y = df['target'].apply(int)
-
 
 # ## Train Test Split
 from sklearn.model_selection import train_test_split
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
-
 # # Estimators
-# 
 # Let's show you how to use the simpler Estimator interface!
 
 import tensorflow as tf
-
-
 # ## Feature Columns
-
 X.columns
-
-
 feat_cols = []
 
 for col in X.columns:
     feat_cols.append(tf.feature_column.numeric_column(col))
 
 feat_cols
-
 
 # ## Input Function
 
