@@ -16,8 +16,6 @@
 # 
 # We'll focus a lot more on NumPy arrays, but let's show some of the capabilities of SciPy:
 
-# In[21]:
-
 
 import numpy as np
 A = np.array([[1,2,3],[4,5,6],[7,8,8]])
@@ -26,16 +24,11 @@ A = np.array([[1,2,3],[4,5,6],[7,8,8]])
 # ## Linear Algebra
 # **linalg**
 
-# In[22]:
-
 
 from scipy import linalg
 
 
 # Determinant of a Matrix
-
-# In[23]:
-
 
 # Compute the determinant of a matrix
 linalg.det(A)
@@ -54,74 +47,25 @@ linalg.det(A)
 
 
 P, L, U = linalg.lu(A)
-
-
-# In[25]:
-
-
 P
-
-
-# In[26]:
-
-
 L
-
-
-# In[27]:
-
-
 U
-
-
-# In[28]:
-
 
 np.dot(L,U)
 
-
 # We can find out the eigenvalues and eigenvectors of this matrix:
-
-# In[30]:
-
-
 EW, EV = linalg.eig(A)
-
-
-# In[31]:
-
-
 EW
-
-
-# In[32]:
-
-
 EV
 
 
 # Solving systems of linear equations can also be done:
 
-# In[41]:
-
 
 v = np.array([[2],[3],[5]])
-
-
-# In[42]:
-
-
 v
 
-
-# In[43]:
-
-
 s = linalg.solve(A,v)
-
-
-# In[44]:
-
 
 s
 
@@ -131,82 +75,32 @@ s
 # 
 # We make one example on how to construct a large matrix:
 
-# In[48]:
-
-
 from scipy import sparse
-
-
-# In[49]:
-
 
 # Row-based linked list sparse matrix
 A = sparse.lil_matrix((1000, 1000))
 
-
-# In[50]:
-
-
 A
 
-
-# In[51]:
-
-
 A[0,:100] = np.random.rand(100)
-
-
-# In[52]:
-
 
 A[1,100:200] = A[0,:100]
 
 
-# In[54]:
-
-
 A.setdiag(np.random.rand(1000))
-
-
-# In[57]:
-
-
 A
 
 
 # **Linear Algebra for Sparse Matrices**
-
-# In[56]:
-
-
 from scipy.sparse import linalg
-
-
-# In[64]:
-
 
 # Convert this matrix to Compressed Sparse Row format.
 A.tocsr()
 
-
-# In[65]:
-
-
 A = A.tocsr()
-
-
-# In[66]:
 
 
 b = np.random.rand(1000)
 
-
-# In[67]:
-
-
 linalg.spsolve(A, b)
 
-
-# There is a lot more that SciPy is capable of, such as Fourier Transforms, Bessel Functions, etc...
-# 
-# You can reference the Documentation for more details!
