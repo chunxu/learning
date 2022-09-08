@@ -13,28 +13,12 @@
 # 
 # We will be working with a famous titanic data set for these exercises. Later on in the Machine Learning section of the course, we will revisit this data, and use it to predict survival rates of passengers. For now, we'll just focus on the visualization of the data with seaborn:
 
-# In[19]:
-
-
 import seaborn as sns
 import matplotlib.pyplot as plt
 get_ipython().run_line_magic('matplotlib', 'inline')
-
-
-# In[27]:
-
-
 sns.set_style('whitegrid')
 
-
-# In[28]:
-
-
 titanic = sns.load_dataset('titanic')
-
-
-# In[40]:
-
 
 titanic.head()
 
@@ -45,107 +29,59 @@ titanic.head()
 # 
 # ** *Note! In order to not lose the plot image, make sure you don't code in the cell that is directly above the plot, there is an extra cell above that one which won't overwrite that plot!* **
 
-# In[42]:
-
 
 # CODE HERE
 # REPLICATE EXERCISE PLOT IMAGE BELOW
 # BE CAREFUL NOT TO OVERWRITE CELL BELOW
 # THAT WOULD REMOVE THE EXERCISE PLOT IMAGE!
-
-
-# In[41]:
-
 
 sns.jointplot(x='fare',y='age',data=titanic)
 
-
-# In[43]:
-
-
 # CODE HERE
 # REPLICATE EXERCISE PLOT IMAGE BELOW
 # BE CAREFUL NOT TO OVERWRITE CELL BELOW
 # THAT WOULD REMOVE THE EXERCISE PLOT IMAGE!
-
-
-# In[44]:
-
 
 sns.distplot(titanic['fare'],bins=30,kde=False,color='red')
 
-
-# In[ ]:
-
-
 # CODE HERE
 # REPLICATE EXERCISE PLOT IMAGE BELOW
 # BE CAREFUL NOT TO OVERWRITE CELL BELOW
 # THAT WOULD REMOVE THE EXERCISE PLOT IMAGE!
-
-
-# In[45]:
 
 
 sns.boxplot(x='class',y='age',data=titanic,palette='rainbow')
 
 
-# In[ ]:
-
-
 # CODE HERE
 # REPLICATE EXERCISE PLOT IMAGE BELOW
 # BE CAREFUL NOT TO OVERWRITE CELL BELOW
 # THAT WOULD REMOVE THE EXERCISE PLOT IMAGE!
-
-
-# In[46]:
-
 
 sns.swarmplot(x='class',y='age',data=titanic,palette='Set2')
 
 
-# In[ ]:
-
 
 # CODE HERE
 # REPLICATE EXERCISE PLOT IMAGE BELOW
 # BE CAREFUL NOT TO OVERWRITE CELL BELOW
 # THAT WOULD REMOVE THE EXERCISE PLOT IMAGE!
-
-
-# In[47]:
-
 
 sns.countplot(x='sex',data=titanic)
 
-
-# In[ ]:
-
-
 # CODE HERE
 # REPLICATE EXERCISE PLOT IMAGE BELOW
 # BE CAREFUL NOT TO OVERWRITE CELL BELOW
 # THAT WOULD REMOVE THE EXERCISE PLOT IMAGE!
-
-
-# In[48]:
 
 
 sns.heatmap(titanic.corr(),cmap='coolwarm')
 plt.title('titanic.corr()')
 
-
-# In[ ]:
-
-
 # CODE HERE
 # REPLICATE EXERCISE PLOT IMAGE BELOW
 # BE CAREFUL NOT TO OVERWRITE CELL BELOW
 # THAT WOULD REMOVE THE EXERCISE PLOT IMAGE!
-
-
-# In[49]:
 
 
 g = sns.FacetGrid(data=titanic,col='sex')
