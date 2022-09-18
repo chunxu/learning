@@ -24,16 +24,10 @@ url = 'http://upload.wikimedia.org/wikipedia/commons/5/56/Kosaciec_szczecinkowat
 Image(url,width=300, height=300)
 
 
-# In[18]:
-
-
 # The Iris Versicolor
 from IPython.display import Image
 url = 'http://upload.wikimedia.org/wikipedia/commons/4/41/Iris_versicolor_3.jpg'
 Image(url,width=300, height=300)
-
-
-# In[19]:
 
 
 # The Iris Virginica
