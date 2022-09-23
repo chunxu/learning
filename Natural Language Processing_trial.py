@@ -1,22 +1,23 @@
-#!/usr/bin/env python
-# coding: utf-8
 
-# ___
+# ## More Resources
+
+# Check out the links below for more info on Natural Language Processing:
 # 
-# <a href='http://www.pieriandata.com'> <img src='../Pierian_Data_Logo.png' /></a>
-# ___
+# [NLTK Book Online](http://www.nltk.org/book/)
+# 
+# [Kaggle Walkthrough](https://www.kaggle.com/c/word2vec-nlp-tutorial/details/part-1-for-beginners-bag-of-words)
+# 
+# [SciKit Learn's Tutorial](http://scikit-learn.org/stable/tutorial/text_analytics/working_with_text_data.html)
+
+
+
 # # NLP (Natural Language Processing) with Python
 # 
-# This is the notebook that goes along with the NLP video lecture!
-# 
-# In this lecture we will discuss a higher level overview of the basics of Natural Language Processing, which basically consists of combining machine learning techniques with text, and using math and statistics to get that text in a format that the machine learning algorithms can understand!
+# we will discuss a higher level overview of the basics of Natural Language Processing, which basically consists of combining machine learning techniques with text, and using math and statistics to get that text in a format that the machine learning algorithms can understand!
 # 
 # Once you've completed this lecture you'll have a project using some Yelp Text Data!
 #     
 # **Requirements: You will need to have NLTK installed, along with downloading the corpus for stopwords. To download everything with a conda installation, run the cell below. Or reference the full video lecture**
-
-#conda install nltk
-
 
 # ONLY RUN THIS CELL IF YOU NEED 
 # TO DOWNLOAD NLTK AND HAVE CONDA
@@ -447,17 +448,4 @@ predictions = pipeline.predict(msg_test)
 
 
 print(classification_report(predictions,label_test))
-
-
-# Now we have a classification report for our model on a true testing set! There is a lot more to Natural Language Processing than what we've covered here, and its vast expanse of topic could fill up several college courses! I encourage you to check out the resources below for more information on NLP!
-
-# ## More Resources
-# 
-# Check out the links below for more info on Natural Language Processing:
-# 
-# [NLTK Book Online](http://www.nltk.org/book/)
-# 
-# [Kaggle Walkthrough](https://www.kaggle.com/c/word2vec-nlp-tutorial/details/part-1-for-beginners-bag-of-words)
-# 
-# [SciKit Learn's Tutorial](http://scikit-learn.org/stable/tutorial/text_analytics/working_with_text_data.html)
 
