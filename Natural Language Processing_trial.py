@@ -15,13 +15,7 @@
 #     
 # **Requirements: You will need to have NLTK installed, along with downloading the corpus for stopwords. To download everything with a conda installation, run the cell below. Or reference the full video lecture**
 
-# In[1]:
-
-
 #conda install nltk
-
-
-# In[1]:
 
 
 # ONLY RUN THIS CELL IF YOU NEED 
@@ -44,17 +38,12 @@
 # 
 # Let's go ahead and use rstrip() plus a list comprehension to get a list of all the lines of text messages:
 
-# In[3]:
-
 
 messages = [line.rstrip() for line in open('smsspamcollection/SMSSpamCollection')]
 print(len(messages))
 
 
 # A collection of texts is also sometimes called "corpus". Let's print the first ten messages and number them using **enumerate**:
-
-# In[4]:
-
 
 for message_no, message in enumerate(messages[:10]):
     print(message_no, message)
@@ -71,15 +60,10 @@ for message_no, message in enumerate(messages[:10]):
 
 # Instead of parsing TSV manually using Python, we can just take advantage of pandas! Let's go ahead and import it!
 
-# In[6]:
-
-
 import pandas as pd
 
 
 # We'll use **read_csv** and make note of the **sep** argument, we can also specify the desired column names by passing in a list of *names*.
-
-# In[7]:
 
 
 messages = pd.read_csv('smsspamcollection/SMSSpamCollection', sep='\t',
@@ -91,16 +75,11 @@ messages.head()
 # 
 # Let's check out some of the stats with some plots and the built-in methods in pandas!
 
-# In[8]:
-
 
 messages.describe()
 
 
 # Let's use **groupby** to use describe by label, this way we can begin to think about the features that separate ham and spam!
-
-# In[9]:
-
 
 messages.groupby('label').describe()
 
@@ -108,8 +87,6 @@ messages.groupby('label').describe()
 # As we continue our analysis we want to start thinking about the features we are going to be using. This goes along with the general idea of [feature engineering](https://en.wikipedia.org/wiki/Feature_engineering). The better your domain knowledge on the data, the better your ability to engineer more features from it. Feature engineering is a very large part of spam detection in general. I encourage you to read up on the topic!
 # 
 # Let's make a new column to detect how long the text messages are:
-
-# In[10]:
 
 
 messages['length'] = messages['message'].apply(len)
@@ -119,8 +96,6 @@ messages.head()
 # ### Data Visualization
 # Let's visualize this! Let's do the imports:
 
-# In[11]:
-
 
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -128,31 +103,21 @@ import seaborn as sns
 get_ipython().run_line_magic('matplotlib', 'inline')
 
 
-# In[12]:
-
-
 messages['length'].plot(bins=50, kind='hist') 
 
 
 # Play around with the bin size! Looks like text length may be a good feature to think about! Let's try to explain why the x-axis goes all the way to 1000ish, this must mean that there is some really long message!
-
-# In[13]:
-
 
 messages.length.describe()
 
 
 # Woah! 910 characters, let's use masking to find this message:
 
-# In[14]:
-
 
 messages[messages['length'] == 910]['message'].iloc[0]
 
 
 # Looks like we have some sort of Romeo sending texts! But let's focus back on the idea of trying to see if message length is a distinguishing feature between ham and spam:
-
-# In[18]:
 
 
 messages.hist(column='length', by='label', bins=50,figsize=(12,4))
@@ -175,8 +140,6 @@ messages.hist(column='length', by='label', bins=50,figsize=(12,4))
 # 
 # First removing punctuation. We can just take advantage of Python's built-in **string** library to get a quick list of all the possible punctuation:
 
-# In[19]:
-
 
 import string
 
@@ -191,36 +154,24 @@ nopunc = ''.join(nopunc)
 
 # Now let's see how to remove stopwords. We can impot a list of english stopwords from NLTK (check the documentation for more languages and info).
 
-# In[20]:
-
 
 from nltk.corpus import stopwords
 stopwords.words('english')[0:10] # Show some stop words
 
 
-# In[21]:
-
-
 nopunc.split()
 
-
-# In[22]:
 
 
 # Now just remove any stopwords
 clean_mess = [word for word in nopunc.split() if word.lower() not in stopwords.words('english')]
 
 
-# In[23]:
-
 
 clean_mess
 
 
 # Now let's put both of these together in a function to apply it to our DataFrame later on:
-
-# In[24]:
-
 
 def text_process(mess):
     """
@@ -241,8 +192,6 @@ def text_process(mess):
 
 # Here is the original DataFrame again:
 
-# In[25]:
-
 
 messages.head()
 
@@ -254,14 +203,8 @@ messages.head()
 # **Note:**
 # We may get some warnings or errors for symbols we didn't account for or that weren't in Unicode (like a British pound symbol)
 
-# In[26]:
-
-
 # Check to make sure its working
 messages['message'].head(5).apply(text_process)
-
-
-# In[27]:
 
 
 # Show original dataframe
@@ -327,15 +270,10 @@ messages.head()
 # 
 # Since there are so many messages, we can expect a lot of zero counts for the presence of that word in that document. Because of this, SciKit Learn will output a [Sparse Matrix](https://en.wikipedia.org/wiki/Sparse_matrix).
 
-# In[28]:
-
-
 from sklearn.feature_extraction.text import CountVectorizer
 
 
 # There are a lot of arguments and parameters that can be passed to the CountVectorizer. In this case we will just specify the **analyzer** to be our own previously defined function:
-
-# In[31]:
 
 
 # Might take awhile...
@@ -347,17 +285,12 @@ print(len(bow_transformer.vocabulary_))
 
 # Let's take one text message and get its bag-of-words counts as a vector, putting to use our new `bow_transformer`:
 
-# In[32]:
-
 
 message4 = messages['message'][3]
 print(message4)
 
 
 # Now let's see its vector representation:
-
-# In[34]:
-
 
 bow4 = bow_transformer.transform([message4])
 print(bow4)
@@ -366,8 +299,6 @@ print(bow4.shape)
 
 # This means that there are seven unique words in message number 4 (after removing common stop words). Two of them appear twice, the rest only once. Let's go ahead and check and confirm which ones appear twice:
 
-# In[36]:
-
 
 print(bow_transformer.get_feature_names()[4073])
 print(bow_transformer.get_feature_names()[9570])
@@ -375,20 +306,12 @@ print(bow_transformer.get_feature_names()[9570])
 
 # Now we can use **.transform** on our Bag-of-Words (bow) transformed object and transform the entire DataFrame of messages. Let's go ahead and check out how the bag-of-words counts for the entire SMS corpus is a large, sparse matrix:
 
-# In[39]:
-
 
 messages_bow = bow_transformer.transform(messages['message'])
 
 
-# In[40]:
-
-
 print('Shape of Sparse Matrix: ', messages_bow.shape)
 print('Amount of Non-Zero occurences: ', messages_bow.nnz)
-
-
-# In[46]:
 
 
 sparsity = (100.0 * messages_bow.nnz / (messages_bow.shape[0] * messages_bow.shape[1]))
@@ -424,8 +347,6 @@ print('sparsity: {}'.format(round(sparsity)))
 # 
 # Let's go ahead and see how we can do this in SciKit Learn:
 
-# In[48]:
-
 
 from sklearn.feature_extraction.text import TfidfTransformer
 
@@ -436,16 +357,11 @@ print(tfidf4)
 
 # We'll go ahead and check what is the IDF (inverse document frequency) of the word `"u"` and of word `"university"`?
 
-# In[50]:
-
-
 print(tfidf_transformer.idf_[bow_transformer.vocabulary_['u']])
 print(tfidf_transformer.idf_[bow_transformer.vocabulary_['university']])
 
 
 # To transform the entire bag-of-words corpus into TF-IDF corpus at once:
-
-# In[51]:
 
 
 messages_tfidf = tfidf_transformer.transform(messages_bow)
@@ -460,7 +376,6 @@ print(messages_tfidf.shape)
 
 # We'll be using scikit-learn here, choosing the [Naive Bayes](http://en.wikipedia.org/wiki/Naive_Bayes_classifier) classifier to start with:
 
-# In[52]:
 
 
 from sklearn.naive_bayes import MultinomialNB
@@ -468,8 +383,6 @@ spam_detect_model = MultinomialNB().fit(messages_tfidf, messages['label'])
 
 
 # Let's try classifying our single random message and checking how we do:
-
-# In[54]:
 
 
 print('predicted:', spam_detect_model.predict(tfidf4)[0])
@@ -481,9 +394,6 @@ print('expected:', messages.label[3])
 # ## Part 6: Model Evaluation
 # Now we want to determine how well our model will do overall on the entire dataset. Let's begin by getting all the predictions:
 
-# In[55]:
-
-
 all_predictions = spam_detect_model.predict(messages_tfidf)
 print(all_predictions)
 
@@ -491,9 +401,6 @@ print(all_predictions)
 # We can use SciKit Learn's built-in classification report, which returns [precision, recall,](https://en.wikipedia.org/wiki/Precision_and_recall) [f1-score](https://en.wikipedia.org/wiki/F1_score), and a column for support (meaning how many cases supported that classification). Check out the links for more detailed info on each of these metrics and the figure below:
 
 # <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Precisionrecall.svg/700px-Precisionrecall.svg.png' width=400 />
-
-# In[56]:
-
 
 from sklearn.metrics import classification_report
 print (classification_report(messages['label'], all_predictions))
@@ -509,9 +416,6 @@ print (classification_report(messages['label'], all_predictions))
 # 
 # ## Train Test Split
 
-# In[57]:
-
-
 from sklearn.model_selection import train_test_split
 
 msg_train, msg_test, label_train, label_test = train_test_split(messages['message'], messages['label'], test_size=0.2)
@@ -525,8 +429,6 @@ print(len(msg_train), len(msg_test), len(msg_train) + len(msg_test))
 # 
 # Let's run our model again and then predict off the test set. We will use SciKit Learn's [pipeline](http://scikit-learn.org/stable/modules/pipeline.html) capabilities to store a pipeline of workflow. This will allow us to set up all the transformations that we will do to the data for future use. Let's see an example of how it works:
 
-# In[58]:
-
 
 from sklearn.pipeline import Pipeline
 
@@ -539,19 +441,9 @@ pipeline = Pipeline([
 
 # Now we can directly pass message text data and the pipeline will do our pre-processing for us! We can treat it as a model/estimator API:
 
-# In[59]:
-
-
 pipeline.fit(msg_train,label_train)
 
-
-# In[60]:
-
-
 predictions = pipeline.predict(msg_test)
-
-
-# In[61]:
 
 
 print(classification_report(predictions,label_test))
