@@ -16,7 +16,6 @@
 
 # ## Data and Setup
 
-# ____
 # ** Import numpy and pandas **
 
 import numpy as np
@@ -50,7 +49,6 @@ df.head(3)
 
 
 # ## Basic Questions
-
 # ** What are the top 5 zipcodes for 911 calls? **
 df['zip'].value_counts().head(5)
 
@@ -83,8 +81,6 @@ sns.countplot(df['Reason'])
 # ** Now use seaborn to create a countplot of 911 calls by Reason. **
 sns.countplot(x= 'Reason', data = df)
 
-
-# ___
 # ** Now let us begin to focus on time information. What is the data type of the objects in the timeStamp column? **
 
 type(df['timeStamp'][0])
@@ -106,7 +102,6 @@ df['timeStamp'][0].dayofweek
 
 df['Hour'] = df['timeStamp'].apply(lambda x: x.hour)
 
-
 df['Month'] = df['timeStamp'].apply(lambda x: x.month)
 df['Day of week'] = df['timeStamp'].apply(lambda x: x.dayofweek)
 
@@ -124,7 +119,6 @@ df['Day of week'] = df['Day of week'].map({0:'Mon',1:'Tue',2:'Wed',3:'Thu',4:'Fr
 sns.countplot(x = 'Day of week', data = df, hue = 'Reason')
 plt.legend(loc = 2)
 
-
 # **Now do the same for Month:**
 
 sns.countplot(x = 'Month', data = df, hue = 'Reason')
@@ -140,7 +134,6 @@ plt.legend(loc = 1)
 byMonth = df.groupby('Month').count()
 
 byMonth.head()
-
 
 # ** Now create a simple plot off of the dataframe indicating the count of calls per month. **
 
