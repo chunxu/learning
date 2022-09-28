@@ -18,3 +18,4 @@ plt.axis("off")
 plt.show()
 
 #font size based on the order of words
+#installation of libraries needed.
