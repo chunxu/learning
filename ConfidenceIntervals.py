@@ -14,6 +14,7 @@ n: sample size
 
 import numpy as np
 import scipy.stats as st
+
 #define sample data
 data = [12, 12, 13, 13, 15, 16, 17, 22, 23, 25, 26, 27, 28, 28, 29]
 #create 95% confidence interval for population mean weight
@@ -28,6 +29,7 @@ st.t.interval(alpha=0.99, df=len(data)-1, loc=np.mean(data), scale=st.sem(data))
 #with larger samples (n≥30), we can assume that the sampling distribution of the sample mean is normally distributed  and can instead use the norm.interval() function from the scipy.stats library.
 import numpy as np
 import scipy.stats as st
+
 #define sample data
 np.random.seed(0)
 data = np.random.randint(10, 30, 50)
