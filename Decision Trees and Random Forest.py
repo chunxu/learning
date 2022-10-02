@@ -29,10 +29,7 @@
 # * pub.rec: The borrower's number of derogatory public records (bankruptcy filings, tax liens, or judgments).
 
 # # Import Libraries
-# 
 # **Import the usual libraries for pandas and plotting. You can import sklearn later on.**
-
-
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -41,7 +38,6 @@ get_ipython().run_line_magic('matplotlib', 'inline')
 
 
 # ## Get the Data
-# 
 # ** Use pandas to read loan_data.csv as a dataframe called loans.**
 loans = pd.read_csv('loan_data.csv')
 
@@ -51,7 +47,6 @@ loans.describe()
 loans.head()
 
 # # Exploratory Data Analysis
-# 
 # data visualization! We'll use seaborn and pandas built-in plotting capabilities, but feel free to use whatever library you want. Don't worry about the colors matching, just worry about getting the main idea of the plot.
 # 
 # ** Create a histogram of two FICO distributions on top of each other, one for each credit.policy outcome.**
