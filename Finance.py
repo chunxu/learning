@@ -1,10 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# ___
-# 
+
 # <a href='http://www.pieriandata.com'> <img src='../Pierian_Data_Logo.png' /></a>
-# ___
 
 # # Finance Data Project 
 # 
@@ -62,7 +60,6 @@ get_ipython().run_line_magic('matplotlib', 'inline')
 
 #df = pd.read_pickle('all_banks')
 
-
 start = datetime.datetime(2006,1,1)
 end = datetime.datetime(2016,1,1)
 
@@ -74,7 +71,6 @@ C = data.DataReader('C','yahoo', start, end)
 # ** Create a list of the ticker symbols (as strings) in alphabetical order. Call this list: tickers**
 
 tickers = ['BAC','C']
-
 
 # ** Use pd.concat to concatenate the bank dataframes together to a single data frame called bank_stocks. Set the keys argument equal to the tickers list. Also pay attention to what axis you concatenate on.**
 
