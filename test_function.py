@@ -9,6 +9,7 @@ a = input ("please input a number: ")
 b = input ("please input another number:")
 
 # turn inputs into numbers
+# use try - except function 
 try:
 	a = float (a)
 except:
