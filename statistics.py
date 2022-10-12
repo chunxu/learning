@@ -1,3 +1,6 @@
+
+# apply statistics in Python
+
 >>> import scipy.stats as ss
 >>> import statsmodels.api as sa
 >>> import scikit_posthocs as sp
