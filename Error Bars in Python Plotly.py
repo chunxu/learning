@@ -1,4 +1,4 @@
-#Error Bars in Python Plotly 
+#Error Bars in Python Plotly  - a third party library
 
 '''
 Plotly Express is the easy-to-use, high-level interface to Plotly, which operates on a variety of types of data and produces easy-to-style figures. For functions representing 2D data points such as px.scatter, px.line, px.bar etc., error bars are given as a column name which is the value of the error_x (for the error on x position) and error_y (for the error on y position).
@@ -10,8 +10,6 @@ df["e"] = df["sepal_width"]/100
 fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species",
                  error_x="e", error_y="e")
 fig.show()
-
-
 
 #Asymmetric Error Bars with Plotly Express
 import plotly.express as px
@@ -50,7 +48,6 @@ fig = go.Figure(data=go.Scatter(
             arrayminus=[0.2, 0.4, 1, 0.2])
         ))
 fig.show()
-
 
 #Error Bars as a Percentage of the y Value
 import plotly.graph_objects as go
